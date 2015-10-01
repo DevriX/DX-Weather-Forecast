@@ -45,7 +45,7 @@ class DX_Weather_Forecast_Plugin_Base {
             // Translation-ready
             add_action( 'plugins_loaded', array( $this, 'dx_add_textdomain' ) );
             // Add earlier execution as it needs to occur before admin page display
-            add_action( 'admin_init', array( $this, 'dx_register_settings' ), 5 );
+            add_action( 'admin_init', array( $this, 'wf_register_settings' ), 5 );
             // Add a sample shortcode
             add_action( 'init', array( $this, 'wc_sample_shortcode' ) );
             //find_city handle
@@ -77,9 +77,9 @@ class DX_Weather_Forecast_Plugin_Base {
             add_options_page(__( "Weather Forecast settings", 'DX-Weather-Forecast' ), __( "Weather forecast", 'DX-Weather-Forecast' ), 'edit_themes', 'weater-forecast', array($this, 'wf_option_page'));
 	}	
 	/**
-	 * The content of the base page
+	 * The content of the base option page
 	 */
-        public function wc_option_page() {
+        public function wf_option_page() {
             include_once( WFP_PATH_INCLUDES . '/base-page-template.php' );
         }	
 	/**
@@ -88,10 +88,13 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Register a settings section with a field for a secure WordPress admin option creation.
 	 * 
 	 */
-	public function dx_register_settings() {
+	public function wf_register_settings() {
 		require_once( WCP_PATH . '/dx-weather-forecast-settings.class.php' );
 		new DX_Weather_Forecast_Settings();
 	}
+        /*
+         * Initial method on user search of city
+         */
 	public function init_find_city() {
             $find_city = filter_input(INPUT_POST, 'find_city', FILTER_SANITIZE_SPECIAL_CHARS);
             if(isset($find_city)){
@@ -100,11 +103,14 @@ class DX_Weather_Forecast_Plugin_Base {
                     $result = $this->get_coord($find_city);
                     if(isset($result->results))
                     {
-                        $this->WC_Plugin = $result;
+                        $this->WF_Plugin = $result;
                     }
                 }
             }
         }
+        /*
+         * get ccordinates using google map api 
+         */
         public function get_coord($search) {
             $responce = wp_remote_get('http://maps.google.com/maps/api/geocode/json?address='.urlencode($search) .'&sensor=false');
             if (!is_wp_error($responce)){                
@@ -120,7 +126,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * First parameter is the shortcode name, would be used like: [dxsampcode]
 	 * 
 	 */
-	public function wc_sample_shortcode() {
+	public function wf_sample_shortcode() {
 		add_shortcode( 'wc_shortcode', array( $this, 'wc_shortcode_body' ) );
 	}
 	
