@@ -108,13 +108,6 @@ class DX_Weather_Forecast_Plugin_Base {
 		_e( "I'm a subpage and I know it!", 'dxbase' );
 		echo '</div>';
 	}
-	
-	/**
-	 * 
-	 *  Adding right and bottom meta boxes to Pages
-	 *   
-	 */
-	
 	/**
 	 * Initialize the Settings class
 	 * 
@@ -224,7 +217,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Add textdomain for plugin
 	 */
 	public function dx_add_textdomain() {
-		load_plugin_textdomain( 'weater-cityes-plugin', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+            load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 	
 	/**
