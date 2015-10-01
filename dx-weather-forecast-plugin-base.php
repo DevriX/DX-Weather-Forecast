@@ -47,7 +47,7 @@ class DX_Weather_Forecast_Plugin_Base {
             // Add earlier execution as it needs to occur before admin page display
             add_action( 'admin_init', array( $this, 'wf_register_settings' ), 5 );
             // Add a sample shortcode
-            add_action( 'init', array( $this, 'wc_sample_shortcode' ) );
+            add_action( 'init', array( $this, 'wf_city_shortcode' ) );
             //find_city handle
             add_action('init', array($this, 'init_find_city'));	
 	}		
@@ -126,8 +126,8 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * First parameter is the shortcode name, would be used like: [dxsampcode]
 	 * 
 	 */
-	public function wf_sample_shortcode() {
-		add_shortcode( 'wc_shortcode', array( $this, 'wc_shortcode_body' ) );
+	public function wf_city_shortcode() {
+		add_shortcode( 'wf_shortcode', array( $this, 'wf_shortcode_body' ) );
 	}
 	
 	/**
@@ -135,7 +135,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * @param array $attr arguments passed to array, like [dxsamcode attr1="one" attr2="two"]
 	 * @param string $content optional, could be used for a content to be wrapped, such as [dxsamcode]somecontnet[/dxsamcode]
 	 */
-	public function wc_shortcode_body( $attr, $content = null ) {
+	public function wf_shortcode_body( $attr, $content = null ) {
             $display_kelvins = get_option('wc_setting');
             switch(true) {
                 case (isset($attr['city'])):
