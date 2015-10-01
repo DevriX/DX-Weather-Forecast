@@ -53,40 +53,30 @@ class DX_Weather_Forecast_Plugin_Base {
             add_action('init', array($this, 'init_find_city'));	
 	}		
 	/**
-	 * 
 	 * Add CSS styles
 	 *  Can be used to style front end 
 	 */
 	public function wf_add_CSS() {
-		wp_register_style( 'samplestyle', plugins_url( '/css/samplestyle.css', __FILE__ ), array(), '1.0', 'screen' );
-		wp_enqueue_style( 'samplestyle' );
-	}
-	
-	/**
-	 *
-	 * Add admin CSS styles - available only on admin
-	 *
-	 */
-	public function wf_add_admin_CSS( $hook ) {
-		wp_register_style( 'samplestyle-admin', plugins_url( '/css/samplestyle-admin.css', __FILE__ ), array(), '1.0', 'screen' );
-		wp_enqueue_style( 'samplestyle-admin' );
-		
-		if( 'toplevel_page_dx-plugin-base' === $hook ) {
-			wp_register_style('dx_help_page',  plugins_url( '/help-page.css', __FILE__ ) );
-			wp_enqueue_style('dx_help_page');
-		}
+            wp_register_style( 'samplestyle', plugins_url( '/css/samplestyle.css', __FILE__ ), array(), '1.0', 'screen' );
+            wp_enqueue_style( 'samplestyle' );
 	}	
 	/**
-	 * 
-	 * Callback for registering pages
-	 * 
-	 * This demo registers a custom page for the plugin and a subpage
-	 *  
+	 * Add admin CSS styles - available only on admin
+	 */
+	public function wf_add_admin_CSS( $hook ) {
+            wp_register_style( 'samplestyle-admin', plugins_url( '/css/samplestyle-admin.css', __FILE__ ), array(), '1.0', 'screen' );
+            wp_enqueue_style( 'samplestyle-admin' );
+            if( 'toplevel_page_dx-plugin-base' === $hook ) {
+                    wp_register_style('dx_help_page',  plugins_url( '/help-page.css', __FILE__ ) );
+                    wp_enqueue_style('dx_help_page');
+            }
+	}	
+	/**
+	 * Callback for registering option page
 	 */
 	public function wf_admin_pages_callback() {
-            add_options_page(__( "Weather city settings", 'weater-cityes-plugin' ), __( "Weather city", 'weater-cityes-plugin' ), 'edit_themes', 'weater-cityes', array($this, 'wf_option_page'));
-	}
-	
+            add_options_page(__( "Weather Forecast settings", 'DX-Weather-Forecast' ), __( "Weather city", 'weater-cityes-plugin' ), 'edit_themes', 'weater-cityes', array($this, 'wf_option_page'));
+	}	
 	/**
 	 * 
 	 * The content of the base page
@@ -124,151 +114,6 @@ class DX_Weather_Forecast_Plugin_Base {
 	 *  Adding right and bottom meta boxes to Pages
 	 *   
 	 */
-	public function dx_meta_boxes_callback() {
-		// register side box
-		add_meta_box( 
-		        'dx_side_meta_box',
-		        __( "WC Side Box", 'dxbase' ),
-		        array( $this, 'dx_side_meta_box' ),
-		        'pluginbase', // leave empty quotes as '' if you want it on all custom post add/edit screens
-		        'side',
-		        'high'
-		    );
-		    
-		// register bottom box
-		add_meta_box(
-		    	'dx_bottom_meta_box',
-		    	__( "WC Bottom Box", 'dxbase' ), 
-		    	array( $this, 'dx_bottom_meta_box' ),
-		    	'' // leave empty quotes as '' if you want it on all custom post add/edit screens or add a post type slug
-		    );
-	}
-	
-	/**
-	 * 
-	 * Init right side meta box here 
-	 * @param post $post the post object of the given page 
-	 * @param metabox $metabox metabox data
-	 */
-	public function dx_side_meta_box( $post, $metabox) {
-		_e("<p>Side meta content here</p>", 'dxbase');
-		
-		// Add some test data here - a custom field, that is
-		$dx_test_input = '';
-		if ( ! empty ( $post ) ) {
-			// Read the database record if we've saved that before
-			$dx_test_input = get_post_meta( $post->ID, 'dx_test_input', true );
-		}
-		?>
-		<label for="dx-test-input"><?php _e( 'Test Custom Field', 'dxbase' ); ?></label>
-		<input type="text" id="dx-test-input" name="dx_test_input" value="<?php echo $dx_test_input; ?>" />
-		<?php
-	}
-	
-	/**
-	 * Save the custom field from the side metabox
-	 * @param $post_id the current post ID
-	 * @return post_id the post ID from the input arguments
-	 * 
-	 */
-	public function dx_save_sample_field( $post_id ) {
-		// Avoid autosaves
-		if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
-
-		$slug = 'pluginbase';
-		// If this isn't a 'book' post, don't update it.
-		if ( ! isset( $_POST['post_type'] ) || $slug != $_POST['post_type'] ) {
-			return;
-		}
-		
-		// If the custom field is found, update the postmeta record
-		// Also, filter the HTML just to be safe
-		if ( isset( $_POST['dx_test_input']  ) ) {
-			update_post_meta( $post_id, 'dx_test_input',  esc_html( $_POST['dx_test_input'] ) );
-		}
-	}
-	
-	/**
-	 * 
-	 * Init bottom meta box here 
-	 * @param post $post the post object of the given page 
-	 * @param metabox $metabox metabox data
-	 */
-	public function dx_bottom_meta_box( $post, $metabox) {
-		_e( "<p>Bottom meta content here</p>", 'dxbase' );
-	}
-	
-	/**
-	 * Register custom post types
-     *
-	 */
-	public function dx_custom_post_types_callback() {
-		register_post_type( 'pluginbase', array(
-			'labels' => array(
-				'name' => __("Base Items", 'dxbase'),
-				'singular_name' => __("Base Item", 'dxbase'),
-				'add_new' => _x("Add New", 'pluginbase', 'dxbase' ),
-				'add_new_item' => __("Add New Base Item", 'dxbase' ),
-				'edit_item' => __("Edit Base Item", 'dxbase' ),
-				'new_item' => __("New Base Item", 'dxbase' ),
-				'view_item' => __("View Base Item", 'dxbase' ),
-				'search_items' => __("Search Base Items", 'dxbase' ),
-				'not_found' =>  __("No base items found", 'dxbase' ),
-				'not_found_in_trash' => __("No base items found in Trash", 'dxbase' ),
-			),
-			'description' => __("Base Items for the demo", 'dxbase'),
-			'public' => true,
-			'publicly_queryable' => true,
-			'query_var' => true,
-			'rewrite' => true,
-			'exclude_from_search' => true,
-			'show_ui' => true,
-			'show_in_menu' => true,
-			'menu_position' => 40, // probably have to change, many plugins use this
-			'supports' => array(
-				'title',
-				'editor',
-				'thumbnail',
-				'custom-fields',
-				'page-attributes',
-			),
-			'taxonomies' => array( 'post_tag' )
-		));	
-	}
-	
-	
-	/**
-	 * Register custom taxonomies
-     *
-	 */
-	public function dx_custom_taxonomies_callback() {
-		register_taxonomy( 'pluginbase_taxonomy', 'pluginbase', array(
-			'hierarchical' => true,
-			'labels' => array(
-				'name' => _x( "Base Item Taxonomies", 'taxonomy general name', 'dxbase' ),
-				'singular_name' => _x( "Base Item Taxonomy", 'taxonomy singular name', 'dxbase' ),
-				'search_items' =>  __( "Search Taxonomies", 'dxbase' ),
-				'popular_items' => __( "Popular Taxonomies", 'dxbase' ),
-				'all_items' => __( "All Taxonomies", 'dxbase' ),
-				'parent_item' => null,
-				'parent_item_colon' => null,
-				'edit_item' => __( "Edit Base Item Taxonomy", 'dxbase' ), 
-				'update_item' => __( "Update Base Item Taxonomy", 'dxbase' ),
-				'add_new_item' => __( "Add New Base Item Taxonomy", 'dxbase' ),
-				'new_item_name' => __( "New Base Item Taxonomy Name", 'dxbase' ),
-				'separate_items_with_commas' => __( "Separate Base Item taxonomies with commas", 'dxbase' ),
-				'add_or_remove_items' => __( "Add or remove Base Item taxonomy", 'dxbase' ),
-				'choose_from_most_used' => __( "Choose from the most used Base Item taxonomies", 'dxbase' )
-			),
-			'show_ui' => true,
-			'query_var' => true,
-			'rewrite' => true,
-		));
-		
-		register_taxonomy_for_object_type( 'pluginbase_taxonomy', 'pluginbase' );
-	}
 	
 	/**
 	 * Initialize the Settings class
