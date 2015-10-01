@@ -69,7 +69,7 @@ class DX_Weather_Forecast_Settings {
                 <?php
             } else {
                 ?>
-                    <input type="checkbox" id="wf_opt_in" name="wf_setting[wf_opt_in]" />';
+                    <input type="checkbox" id="wf_opt_in" name="wf_setting[wf_opt_in]" />
                 <?php
             }
         }
