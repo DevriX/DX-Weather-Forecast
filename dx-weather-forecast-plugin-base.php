@@ -5,7 +5,7 @@
  * Author: Ivan Mudrik
  * Author URI: http://ivan-mudrik.kl.com.ua/
  * Version: 1.0
- * Text Domain: weater-cityes-plugin
+ * Text Domain: DX-Weather-Forecast
  * License: GPL2
  */
 
@@ -22,7 +22,7 @@ define( 'WFP_URL_INCLUDES', WFP_URL . '/inc' );
  * 
  * The plugin base class - the root of all WP goods!
  * 
- * @author nofearinc
+ * @author meatman
  *
  */
 class DX_Weather_Forecast_Plugin_Base {
@@ -193,22 +193,17 @@ class DX_Weather_Forecast_Plugin_Base {
 	
 }
 
-
 /**
  * Register activation hook
- *
  */
 function dx_on_activate_callback() {
 	// do something on activation
 }
-
 /**
  * Register deactivation hook
- *
  */
 function dx_on_deactivate_callback() {
 	// do something when deactivated
 }
-
 // Initialize everything
 $dx_weather_forecast_plugin_base = new DX_Weather_Forecast_Plugin_Base();
