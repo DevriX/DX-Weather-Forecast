@@ -33,8 +33,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	public function __construct() {
             // add script and style calls the WP way 
             // it's a bit confusing as styles are called with a scripts hook
-            // @blamenacin - http://make.wordpress.org/core/2011/12/12/use-wp_enqueue_scripts-not-wp_print_styles-to-enqueue-scripts-and-styles-for-the-frontend/
-            add_action( 'wp_enqueue_scripts', array( $this, 'wf_add_CSS' ) );
+            // @blamenacin - http://make.wordpress.org/core/2011/12/12/use-wp_enqueue_scripts-not-wp_print_styles-to-enqueue-scripts-and-styles-for-the-frontend/           
             // add scripts and styles only available in admin
             add_action( 'admin_enqueue_scripts', array( $this, 'wf_add_admin_CSS' ) );
             // register admin pages for the plugin
@@ -51,23 +50,11 @@ class DX_Weather_Forecast_Plugin_Base {
             add_action( 'init', array( $this, 'init_find_city' ) );	
 	}		
 	/**
-	 * Add CSS styles
-	 *  Can be used to style front end 
-	 */
-	public function wf_add_CSS() {
-            wp_register_style( 'samplestyle', plugins_url( '/css/samplestyle.css', __FILE__ ), array(), '1.0', 'screen' );
-            wp_enqueue_style( 'samplestyle' );
-	}	
-	/**
 	 * Add admin CSS styles - available only on admin
 	 */
 	public function wf_add_admin_CSS( $hook ) {
-            wp_register_style( 'samplestyle-admin', plugins_url( '/css/samplestyle-admin.css', __FILE__ ), array(), '1.0', 'screen' );
-            wp_enqueue_style( 'samplestyle-admin' );
-            if( 'toplevel_page_dx-plugin-base' === $hook ) {
-                    wp_register_style('dx_help_page',  plugins_url( '/help-page.css', __FILE__ ) );
-                    wp_enqueue_style('dx_help_page');
-            }
+            wp_register_style( 'style-admin', plugins_url( '/css/style-admin.css', __FILE__ ), array(), '1.0', 'screen' );
+            wp_enqueue_style( 'style-admin' );
 	}	
 	/**
 	 * Callback for registering option page
