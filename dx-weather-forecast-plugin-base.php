@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Weater cityes
+ * Plugin Name: DX Weather Forecast
  * Description: A plugin get weater for cityes
  * Author: Ivan Mudrik
  * Author URI: http://ivan-mudrik.kl.com.ua/
@@ -10,12 +10,12 @@
  */
 
 
-define( 'WCP_VERSION', '1.0' );
-define( 'WCP_PATH', dirname( __FILE__ ) );
-define( 'WCP_PATH_INCLUDES', dirname( __FILE__ ) . '/inc' );
-define( 'WCP_FOLDER', basename( WCP_PATH ) );
-define( 'WCP_URL', plugins_url() . '/' . WCP_FOLDER );
-define( 'WCP_URL_INCLUDES', WCP_URL . '/inc' );
+define( 'WFP_VERSION', '1.0' );
+define( 'WFP_PATH', dirname( __FILE__ ) );
+define( 'WFP_PATH_INCLUDES', dirname( __FILE__ ) . '/inc' );
+define( 'WFP_FOLDER', basename( WFP_PATH ) );
+define( 'WFP_URL', plugins_url() . '/' . WFP_FOLDER );
+define( 'WFP_URL_INCLUDES', WFP_URL . '/inc' );
 
 
 /**
@@ -32,88 +32,58 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Assign everything as a call from within the constructor
 	 */
 	public function __construct() {
-		// add script and style calls the WP way 
-		// it's a bit confusing as styles are called with a scripts hook
-		// @blamenacin - http://make.wordpress.org/core/2011/12/12/use-wp_enqueue_scripts-not-wp_print_styles-to-enqueue-scripts-and-styles-for-the-frontend/
-		add_action( 'wp_enqueue_scripts', array( $this, 'dx_add_JS' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'dx_add_CSS' ) );
-		
-		// add scripts and styles only available in admin
-		add_action( 'admin_enqueue_scripts', array( $this, 'dx_add_admin_JS' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'dx_add_admin_CSS' ) );
-		
-		// register admin pages for the plugin
-		add_action( 'admin_menu', array( $this, 'dx_admin_pages_callback' ) );
-		
-		// register meta boxes for Pages (could be replicated for posts and custom post types)
-		add_action( 'add_meta_boxes', array( $this, 'dx_meta_boxes_callback' ) );
-		
-		// register save_post hooks for saving the custom fields
-		add_action( 'save_post', array( $this, 'dx_save_sample_field' ) );
-		
-		// Register custom post types and taxonomies
-		add_action( 'init', array( $this, 'dx_custom_post_types_callback' ), 5 );
-		add_action( 'init', array( $this, 'dx_custom_taxonomies_callback' ), 6 );
-		
-		// Register activation and deactivation hooks
-		register_activation_hook( __FILE__, 'dx_on_activate_callback' );
-		register_deactivation_hook( __FILE__, 'dx_on_deactivate_callback' );
-		
-		// Translation-ready
-		add_action( 'plugins_loaded', array( $this, 'dx_add_textdomain' ) );
-		
-		// Add earlier execution as it needs to occur before admin page display
-		add_action( 'admin_init', array( $this, 'dx_register_settings' ), 5 );
-		
-		// Add a sample shortcode
-		add_action( 'init', array( $this, 'wc_sample_shortcode' ) );
-		
-		// Add a sample widget
-		add_action( 'widgets_init', array( $this, 'dx_sample_widget' ) );
-                
-                //find_city handle
-                add_action('init', array($this, 'init_find_city'));
-		
-		/*
-		 * TODO:
-		 * 		template_redirect
-		 */
-		
-		// Add actions for storing value and fetching URL
-		// use the wp_ajax_nopriv_ hook for non-logged users (handle guest actions)
- 		add_action( 'wp_ajax_store_ajax_value', array( $this, 'store_ajax_value' ) );
- 		add_action( 'wp_ajax_fetch_ajax_url_http', array( $this, 'fetch_ajax_url_http' ) );
-		
-	}	
-	
-	/**
-	 * 
-	 * Adding JavaScript scripts
-	 * 
-	 * Loading existing scripts from wp-includes or adding custom ones
-	 * 
-	 */
-	public function dx_add_JS() {
-		wp_enqueue_script( 'jquery' );
-		// load custom JSes and put them in footer
-		wp_register_script( 'samplescript', plugins_url( '/js/samplescript.js' , __FILE__ ), array('jquery'), '1.0', true );
-		wp_enqueue_script( 'samplescript' );
-	}
-	
-	
-	/**
-	 *
-	 * Adding JavaScript scripts for the admin pages only
-	 *
-	 * Loading existing scripts from wp-includes or adding custom ones
-	 *
-	 */
-	public function dx_add_admin_JS( $hook ) {
-		wp_enqueue_script( 'jquery' );
-		wp_register_script( 'samplescript-admin', plugins_url( '/js/samplescript-admin.js' , __FILE__ ), array('jquery'), '1.0', true );
-		wp_enqueue_script( 'samplescript-admin' );
-	}
-	
+            // add script and style calls the WP way 
+            // it's a bit confusing as styles are called with a scripts hook
+            // @blamenacin - http://make.wordpress.org/core/2011/12/12/use-wp_enqueue_scripts-not-wp_print_styles-to-enqueue-scripts-and-styles-for-the-frontend/
+            add_action( 'wp_enqueue_scripts', array( $this, 'dx_add_JS' ) );
+            add_action( 'wp_enqueue_scripts', array( $this, 'dx_add_CSS' ) );
+
+            // add scripts and styles only available in admin
+            add_action( 'admin_enqueue_scripts', array( $this, 'dx_add_admin_JS' ) );
+            add_action( 'admin_enqueue_scripts', array( $this, 'dx_add_admin_CSS' ) );
+
+            // register admin pages for the plugin
+            add_action( 'admin_menu', array( $this, 'dx_admin_pages_callback' ) );
+
+            // register meta boxes for Pages (could be replicated for posts and custom post types)
+            add_action( 'add_meta_boxes', array( $this, 'dx_meta_boxes_callback' ) );
+
+            // register save_post hooks for saving the custom fields
+            add_action( 'save_post', array( $this, 'dx_save_sample_field' ) );
+
+            // Register custom post types and taxonomies
+            add_action( 'init', array( $this, 'dx_custom_post_types_callback' ), 5 );
+            add_action( 'init', array( $this, 'dx_custom_taxonomies_callback' ), 6 );
+
+            // Register activation and deactivation hooks
+            register_activation_hook( __FILE__, 'dx_on_activate_callback' );
+            register_deactivation_hook( __FILE__, 'dx_on_deactivate_callback' );
+
+            // Translation-ready
+            add_action( 'plugins_loaded', array( $this, 'dx_add_textdomain' ) );
+
+            // Add earlier execution as it needs to occur before admin page display
+            add_action( 'admin_init', array( $this, 'dx_register_settings' ), 5 );
+
+            // Add a sample shortcode
+            add_action( 'init', array( $this, 'wc_sample_shortcode' ) );
+
+            // Add a sample widget
+            add_action( 'widgets_init', array( $this, 'dx_sample_widget' ) );
+
+            //find_city handle
+            add_action('init', array($this, 'init_find_city'));
+
+            /*
+             * TODO:
+             * 		template_redirect
+             */
+
+            // Add actions for storing value and fetching URL
+            // use the wp_ajax_nopriv_ hook for non-logged users (handle guest actions)
+            add_action( 'wp_ajax_store_ajax_value', array( $this, 'store_ajax_value' ) );
+            add_action( 'wp_ajax_fetch_ajax_url_http', array( $this, 'fetch_ajax_url_http' ) );		
+	}		
 	/**
 	 * 
 	 * Add CSS styles
