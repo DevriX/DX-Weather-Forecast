@@ -24,21 +24,21 @@ class DX_Weather_Forecast_Settings {
             add_settings_section(
                     'wf_settings_section',         // ID used to identify this section and with which to register options
                     __( "Google maps API key", 'DX-Weather-Forecast' ),                  // Title to be displayed on the administration page
-                    array($this, 'wc_settings_callback'), // Callback used to render the description of the section
-                    'weater-cityes'                           // Page on which to add this section of options
+                    array($this, 'wf_settings_callback'), // Callback used to render the description of the section
+                    'weater-forecast'                           // Page on which to add this section of options
             );
             add_settings_field(
                     'wf_api_key',                      // ID used to identify the field throughout the theme
                     __( "WF API key: ", 'DX-Weather-Forecast' ),                           // The label to the left of the option interface element
                     array( $this, 'wf_api_key_callback' ),   // The name of the function responsible for rendering the option interface
-                    'weater-cityes',                          // The page on which this option will be displayed
-                    'wc_settings_section'         // The name of the section to which this field belongs
+                    'weater-forecast',                          // The page on which this option will be displayed
+                    'wf_settings_section'         // The name of the section to which this field belongs
             );
             add_settings_field(
-                    'dx_opt_in',                      // ID used to identify the field throughout the theme
+                    'wf_opt_in',                      // ID used to identify the field throughout the theme
                     __( "Display Kelvins: ", 'DX-Weather-Forecast' ),                           // The label to the left of the option interface element
                     array( $this, 'wf_opt_in_callback' ),   // The name of the function responsible for rendering the option interface
-                    'weater-cityes',                          // The page on which this option will be displayed
+                    'weater-forecast',                          // The page on which this option will be displayed
                     'wf_settings_section'         // The name of the section to which this field belongs
             );
 	}
