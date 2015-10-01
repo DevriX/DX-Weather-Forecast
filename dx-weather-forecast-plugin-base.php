@@ -89,7 +89,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * 
 	 */
 	public function wf_register_settings() {
-		require_once( WCP_PATH . '/dx-weather-forecast-settings.class.php' );
+		require_once( WFP_PATH . '/dx-weather-forecast-settings.class.php' );
 		new DX_Weather_Forecast_Settings();
 	}
         /*
@@ -135,7 +135,7 @@ class DX_Weather_Forecast_Plugin_Base {
                 case ( isset( $attr['city'] ) ):
                     $weather = $this->get_city( 'q='.$attr['city'] );
                     if( isset( $weather->name ) ) {
-                        include WCP_PATH_INCLUDES . '/weather-template.php';
+                        include WFP_PATH_INCLUDES . '/weather-template.php';
                         return ob_get_clean();
                     } else {
                         return $weather;
@@ -145,7 +145,7 @@ class DX_Weather_Forecast_Plugin_Base {
                     list( $lat, $lon ) = explode( ',', $attr['coord'] );
                     $weather = $this->get_city( 'lat='.$lat.'&lon='.$lon );
                     if( isset( $weather->name ) ) {
-                        include WCP_PATH_INCLUDES . '/weather-template.php';
+                        include WFP_PATH_INCLUDES . '/weather-template.php';
                         return ob_get_clean();
                     } else {
                         return $weather;
@@ -158,30 +158,30 @@ class DX_Weather_Forecast_Plugin_Base {
          * Weater result are cashed with 30m intervar (weather doesn't change in it interval so mutch)
          */
 	public function get_city( $param ) {
-            $wc_all_cityes = get_option( 'wc_all_cityes' );            
+            $wf_all_cityes = get_option( 'wf_all_cityes' );            
             if(
-                !isset( $wc_all_cityes[$param] ) ||  
+                !isset( $wf_all_cityes[$param] ) ||  
                 (
-                    isset( $wc_all_cityes[$param] ) &&
+                    isset( $wf_all_cityes[$param] ) &&
                     (   
-                        time() >= $wc_all_cityes[$param]['time']
+                        time() >= $wf_all_cityes[$param]['time']
                     )
                 )
             ){
                 $responce = wp_remote_get( 'http://api.openweathermap.org/data/2.5/weather?'.$param );
                 if ( !is_wp_error( $responce ) ){                
                     $body = json_decode( $responce['body'] );
-                    $wc_all_cityes[$param] = array(
+                    $wf_all_cityes[$param] = array(
                         'body'  => $body,
                         'time'  => mktime( date('H'), date('i')+30, date('s'), date("m"), date("d"), date("Y") )
                     );
-                    update_option( 'wc_all_cityes', $wc_all_cityes );
+                    update_option( 'wf_all_cityes', $wf_all_cityes );
                     return $body;
                 } else {
                     return __( 'Error ocured!', 'DX-Weather-Forecast' );
                 }
             } else {
-                return $wc_all_cityes[$param]['body'];
+                return $wf_all_cityes[$param]['body'];
             }
         }
 	/**
