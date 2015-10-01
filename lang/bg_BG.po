@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2015-10-01 12:30+0300\n"
+"PO-Revision-Date: 2015-10-01 12:31+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: bg_BG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: dx-weather-forecast-plugin-base.php:76
+msgid "Weather Forecast settings"
+msgstr "Настройки Прогноза за времето"
+
+#: dx-weather-forecast-plugin-base.php:76
+msgid "Weather forecast"
+msgstr "Прогноза за времето"
+
+#: dx-weather-forecast-plugin-base.php:118
+#: dx-weather-forecast-plugin-base.php:180
+msgid "Error ocured!"
+msgstr "Грешка"
+
+#: dx-weather-forecast-settings.class.php:21
+msgid "Google maps API key"
+msgstr "Google Maps API ключ"
+
+#: dx-weather-forecast-settings.class.php:27
+msgid "WF API key: "
+msgstr "WF API ключ:"
+
+#: dx-weather-forecast-settings.class.php:34
+msgid "Display Kelvins: "
+msgstr "Посочете Келвини:"
+
+#: dx-weather-forecast-settings.class.php:44
+msgid "Enter API key"
+msgstr "Въведете ключова API"
+
+#: inc/base-page-template.php:3
+msgid "Weather cityes plugin page"
+msgstr "Времето cityes плъгин страница"
+
+#: inc/base-page-template.php:8
+msgid "Find"
+msgstr "търсене"
+
+#: inc/base-page-template.php:31 inc/base-page-template.php:49
+msgid "Shortcode:"
+msgstr "Кратък код"
+
+#: inc/base-page-template.php:44
+msgid "Results:"
+msgstr "Резултати:"
+
+#: inc/weather-template.php:3
+msgid "City of"
+msgstr "Град"
+
+#: inc/weather-template.php:13
+msgid "Wind"
+msgstr "Вятър"
+
+#: inc/weather-template.php:14
+msgid "m/s"
+msgstr "Метър в секунда"
+
+#: inc/weather-template.php:19
+msgid "Pressure"
+msgstr "Налягане"
+
+#: inc/weather-template.php:20
+msgid "hpa"
+msgstr "HPA"
+
+#: inc/weather-template.php:23
+msgid "Humidity"
+msgstr "Влажност"
+
+#: inc/weather-template.php:27
+msgid "Sunrise"
+msgstr "Изгрев"
+
+#: inc/weather-template.php:31
+msgid "Sunset"
+msgstr "Залез"
+
+#: inc/weather-template.php:35
+msgid "Geo coords"
+msgstr "Гео "
+
+#. Plugin Name of the plugin/theme
+msgid "DX Weather Forecast"
+msgstr "DX Прогноза за времето"
+
+#. Description of the plugin/theme
+msgid "A plugin get weater for cityes"
+msgstr "A плъгин получите Ясно за cityes"
+
+#. Author of the plugin/theme
+msgid "Ivan Mudrik"
+msgstr "Иван Mudrik"
+
+#. Author URI of the plugin/theme
+msgid "http://ivan-mudrik.kl.com.ua/"
+msgstr "http://ivan-mudrik.kl.com.ua/"
