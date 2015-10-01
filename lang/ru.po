@@ -1,0 +1,116 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DX Weather Forecast\n"
+"POT-Creation-Date: 2015-10-01 12:22+0300\n"
+"PO-Revision-Date: 2015-10-01 12:26+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: dx-weather-forecast-plugin-base.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: dx-weather-forecast-plugin-base.php:76
+msgid "Weather Forecast settings"
+msgstr "Настройки Прогноз погоды"
+
+#: dx-weather-forecast-plugin-base.php:76
+msgid "Weather forecast"
+msgstr "Прогноз погоды"
+
+#: dx-weather-forecast-plugin-base.php:118
+#: dx-weather-forecast-plugin-base.php:180
+msgid "Error ocured!"
+msgstr "Ошибка!"
+
+#: dx-weather-forecast-settings.class.php:21
+msgid "Google maps API key"
+msgstr "Google Maps API ключ"
+
+#: dx-weather-forecast-settings.class.php:27
+msgid "WF API key: "
+msgstr "API ключ"
+
+#: dx-weather-forecast-settings.class.php:34
+msgid "Display Kelvins: "
+msgstr "Отображение кельвинов:"
+
+#: dx-weather-forecast-settings.class.php:44
+msgid "Enter API key"
+msgstr "Введите Api ключ"
+
+#: inc/base-page-template.php:3
+msgid "Weather cityes plugin page"
+msgstr "Страница плагина"
+
+#: inc/base-page-template.php:8
+msgid "Find"
+msgstr "Поиск"
+
+#: inc/base-page-template.php:31 inc/base-page-template.php:49
+msgid "Shortcode:"
+msgstr "Шорткод"
+
+#: inc/base-page-template.php:44
+msgid "Results:"
+msgstr "Результаты:"
+
+#: inc/weather-template.php:3
+msgid "City of"
+msgstr "Город"
+
+#: inc/weather-template.php:13
+msgid "Wind"
+msgstr "Ветер"
+
+#: inc/weather-template.php:14
+msgid "m/s"
+msgstr "м/с"
+
+#: inc/weather-template.php:19
+msgid "Pressure"
+msgstr "Давление"
+
+#: inc/weather-template.php:20
+msgid "hpa"
+msgstr "гПа"
+
+#: inc/weather-template.php:23
+msgid "Humidity"
+msgstr "Влажность"
+
+#: inc/weather-template.php:27
+msgid "Sunrise"
+msgstr "Восход"
+
+#: inc/weather-template.php:31
+msgid "Sunset"
+msgstr "Закат"
+
+#: inc/weather-template.php:35
+msgid "Geo coords"
+msgstr "Географические координаты"
+
+#. Plugin Name of the plugin/theme
+msgid "DX Weather Forecast"
+msgstr "DX Прогноз погоды"
+
+#. Description of the plugin/theme
+msgid "A plugin get weater for cityes"
+msgstr "Плагин отображает погоду для городов."
+
+#. Author of the plugin/theme
+msgid "Ivan Mudrik"
+msgstr "Иван Мудрик"
+
+#. Author URI of the plugin/theme
+msgid "http://ivan-mudrik.kl.com.ua/"
+msgstr "http://ivan-mudrik.kl.com.ua/"

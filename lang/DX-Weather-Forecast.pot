@@ -1,0 +1,117 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DX Weather Forecast\n"
+"POT-Creation-Date: 2015-10-01 12:22+0300\n"
+"PO-Revision-Date: 2015-10-01 12:21+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: dx-weather-forecast-plugin-base.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: dx-weather-forecast-plugin-base.php:76
+msgid "Weather Forecast settings"
+msgstr ""
+
+#: dx-weather-forecast-plugin-base.php:76
+msgid "Weather forecast"
+msgstr ""
+
+#: dx-weather-forecast-plugin-base.php:118
+#: dx-weather-forecast-plugin-base.php:180
+msgid "Error ocured!"
+msgstr ""
+
+#: dx-weather-forecast-settings.class.php:21
+msgid "Google maps API key"
+msgstr ""
+
+#: dx-weather-forecast-settings.class.php:27
+msgid "WF API key: "
+msgstr ""
+
+#: dx-weather-forecast-settings.class.php:34
+msgid "Display Kelvins: "
+msgstr ""
+
+#: dx-weather-forecast-settings.class.php:44
+msgid "Enter API key"
+msgstr ""
+
+#: inc/base-page-template.php:3
+msgid "Weather cityes plugin page"
+msgstr ""
+
+#: inc/base-page-template.php:8
+msgid "Find"
+msgstr ""
+
+#: inc/base-page-template.php:31 inc/base-page-template.php:49
+msgid "Shortcode:"
+msgstr ""
+
+#: inc/base-page-template.php:44
+msgid "Results:"
+msgstr ""
+
+#: inc/weather-template.php:3
+msgid "City of"
+msgstr ""
+
+#: inc/weather-template.php:13
+msgid "Wind"
+msgstr ""
+
+#: inc/weather-template.php:14
+msgid "m/s"
+msgstr ""
+
+#: inc/weather-template.php:19
+msgid "Pressure"
+msgstr ""
+
+#: inc/weather-template.php:20
+msgid "hpa"
+msgstr ""
+
+#: inc/weather-template.php:23
+msgid "Humidity"
+msgstr ""
+
+#: inc/weather-template.php:27
+msgid "Sunrise"
+msgstr ""
+
+#: inc/weather-template.php:31
+msgid "Sunset"
+msgstr ""
+
+#: inc/weather-template.php:35
+msgid "Geo coords"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "DX Weather Forecast"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A plugin get weater for cityes"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Ivan Mudrik"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://ivan-mudrik.kl.com.ua/"
+msgstr ""
