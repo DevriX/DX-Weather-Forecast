@@ -35,61 +35,29 @@ class DX_Weather_Forecast_Plugin_Base {
             // add script and style calls the WP way 
             // it's a bit confusing as styles are called with a scripts hook
             // @blamenacin - http://make.wordpress.org/core/2011/12/12/use-wp_enqueue_scripts-not-wp_print_styles-to-enqueue-scripts-and-styles-for-the-frontend/
-            add_action( 'wp_enqueue_scripts', array( $this, 'dx_add_JS' ) );
-            add_action( 'wp_enqueue_scripts', array( $this, 'dx_add_CSS' ) );
-
+            add_action( 'wp_enqueue_scripts', array( $this, 'wf_add_CSS' ) );
             // add scripts and styles only available in admin
-            add_action( 'admin_enqueue_scripts', array( $this, 'dx_add_admin_JS' ) );
-            add_action( 'admin_enqueue_scripts', array( $this, 'dx_add_admin_CSS' ) );
-
+            add_action( 'admin_enqueue_scripts', array( $this, 'wf_add_admin_CSS' ) );
             // register admin pages for the plugin
-            add_action( 'admin_menu', array( $this, 'dx_admin_pages_callback' ) );
-
-            // register meta boxes for Pages (could be replicated for posts and custom post types)
-            add_action( 'add_meta_boxes', array( $this, 'dx_meta_boxes_callback' ) );
-
-            // register save_post hooks for saving the custom fields
-            add_action( 'save_post', array( $this, 'dx_save_sample_field' ) );
-
-            // Register custom post types and taxonomies
-            add_action( 'init', array( $this, 'dx_custom_post_types_callback' ), 5 );
-            add_action( 'init', array( $this, 'dx_custom_taxonomies_callback' ), 6 );
-
+            add_action( 'admin_menu', array( $this, 'wf_admin_pages_callback' ) );
             // Register activation and deactivation hooks
             register_activation_hook( __FILE__, 'dx_on_activate_callback' );
             register_deactivation_hook( __FILE__, 'dx_on_deactivate_callback' );
-
             // Translation-ready
             add_action( 'plugins_loaded', array( $this, 'dx_add_textdomain' ) );
-
             // Add earlier execution as it needs to occur before admin page display
             add_action( 'admin_init', array( $this, 'dx_register_settings' ), 5 );
-
             // Add a sample shortcode
             add_action( 'init', array( $this, 'wc_sample_shortcode' ) );
-
-            // Add a sample widget
-            add_action( 'widgets_init', array( $this, 'dx_sample_widget' ) );
-
             //find_city handle
-            add_action('init', array($this, 'init_find_city'));
-
-            /*
-             * TODO:
-             * 		template_redirect
-             */
-
-            // Add actions for storing value and fetching URL
-            // use the wp_ajax_nopriv_ hook for non-logged users (handle guest actions)
-            add_action( 'wp_ajax_store_ajax_value', array( $this, 'store_ajax_value' ) );
-            add_action( 'wp_ajax_fetch_ajax_url_http', array( $this, 'fetch_ajax_url_http' ) );		
+            add_action('init', array($this, 'init_find_city'));	
 	}		
 	/**
 	 * 
 	 * Add CSS styles
-	 * 
+	 *  Can be used to style front end 
 	 */
-	public function dx_add_CSS() {
+	public function wf_add_CSS() {
 		wp_register_style( 'samplestyle', plugins_url( '/css/samplestyle.css', __FILE__ ), array(), '1.0', 'screen' );
 		wp_enqueue_style( 'samplestyle' );
 	}
@@ -99,7 +67,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Add admin CSS styles - available only on admin
 	 *
 	 */
-	public function dx_add_admin_CSS( $hook ) {
+	public function wf_add_admin_CSS( $hook ) {
 		wp_register_style( 'samplestyle-admin', plugins_url( '/css/samplestyle-admin.css', __FILE__ ), array(), '1.0', 'screen' );
 		wp_enqueue_style( 'samplestyle-admin' );
 		
@@ -107,8 +75,7 @@ class DX_Weather_Forecast_Plugin_Base {
 			wp_register_style('dx_help_page',  plugins_url( '/help-page.css', __FILE__ ) );
 			wp_enqueue_style('dx_help_page');
 		}
-	}
-	
+	}	
 	/**
 	 * 
 	 * Callback for registering pages
@@ -116,11 +83,8 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * This demo registers a custom page for the plugin and a subpage
 	 *  
 	 */
-	public function dx_admin_pages_callback() {
-            add_options_page(__( "Weather city settings", 'weater-cityes-plugin' ), __( "Weather city", 'weater-cityes-plugin' ), 'edit_themes', 'weater-cityes', array($this, 'wc_option_page'));
-//		add_menu_page(__( "Plugin Base Admin", 'dxbase' ), __( "Plugin Base Admin", 'dxbase' ), 'edit_themes', 'dx-plugin-base', array( $this, 'dx_plugin_base' ) );		
-//		add_submenu_page( 'dx-plugin-base', __( "Base Subpage", 'dxbase' ), __( "Base Subpage", 'dxbase' ), 'edit_themes', 'dx-base-subpage', array( $this, 'dx_plugin_subpage' ) );
-//		add_submenu_page( 'dx-plugin-base', __( "Remote Subpage", 'dxbase' ), __( "Remote Subpage", 'dxbase' ), 'edit_themes', 'dx-remote-subpage', array( $this, 'dx_plugin_side_access_page' ) );
+	public function wf_admin_pages_callback() {
+            add_options_page(__( "Weather city settings", 'weater-cityes-plugin' ), __( "Weather city", 'weater-cityes-plugin' ), 'edit_themes', 'weater-cityes', array($this, 'wf_option_page'));
 	}
 	
 	/**
@@ -129,14 +93,14 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * 
 	 */
         public function wc_option_page() {
-            include_once( WCP_PATH_INCLUDES . '/base-page-template.php' );
+            include_once( WFP_PATH_INCLUDES . '/base-page-template.php' );
         }
 	public function dx_plugin_base() {
-		include_once( WCP_PATH_INCLUDES . '/base-page-template.php' );
+		include_once( WFP_PATH_INCLUDES . '/base-page-template.php' );
 	}
 	
 	public function dx_plugin_side_access_page() {
-		include_once( WCP_PATH_INCLUDES . '/remote-page-template.php' );
+		include_once( WFP_PATH_INCLUDES . '/remote-page-template.php' );
 	}
 	
 	/**
