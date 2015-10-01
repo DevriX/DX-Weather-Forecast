@@ -121,19 +121,14 @@ class DX_Weather_Forecast_Plugin_Base {
             }
         }
 	/**
-	 * Register a sample shortcode to be used
-	 * 
-	 * First parameter is the shortcode name, would be used like: [dxsampcode]
-	 * 
+	 * First parameter is the shortcode name, would be used like: [wf_shortcode]	 
 	 */
 	public function wf_city_shortcode() {
 		add_shortcode( 'wf_shortcode', array( $this, 'wf_shortcode_body' ) );
-	}
-	
+	}	
 	/**
-	 * Returns the content of the sample shortcode, like [dxsamplcode]
-	 * @param array $attr arguments passed to array, like [dxsamcode attr1="one" attr2="two"]
-	 * @param string $content optional, could be used for a content to be wrapped, such as [dxsamcode]somecontnet[/dxsamcode]
+	 * Returns the content of the sample shortcode, like [wf_shortcode]
+	 * @param array $attr arguments passed to array, like [wf_shortcode city="London" coord="0,0"]
 	 */
 	public function wf_shortcode_body( $attr, $content = null ) {
             $display_kelvins = get_option('wc_setting');
