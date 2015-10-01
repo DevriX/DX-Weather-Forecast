@@ -27,8 +27,7 @@ define( 'WFP_URL_INCLUDES', WFP_URL . '/inc' );
  */
 class DX_Weather_Forecast_Plugin_Base {
         public $WF_Plugin;
-    /**
-	 * 
+        /**
 	 * Assign everything as a call from within the constructor
 	 */
 	public function __construct() {
@@ -78,36 +77,11 @@ class DX_Weather_Forecast_Plugin_Base {
             add_options_page(__( "Weather Forecast settings", 'DX-Weather-Forecast' ), __( "Weather forecast", 'DX-Weather-Forecast' ), 'edit_themes', 'weater-forecast', array($this, 'wf_option_page'));
 	}	
 	/**
-	 * 
 	 * The content of the base page
-	 * 
 	 */
         public function wc_option_page() {
             include_once( WFP_PATH_INCLUDES . '/base-page-template.php' );
-        }
-	public function dx_plugin_base() {
-		include_once( WFP_PATH_INCLUDES . '/base-page-template.php' );
-	}
-	
-	public function dx_plugin_side_access_page() {
-		include_once( WFP_PATH_INCLUDES . '/remote-page-template.php' );
-	}
-	
-	/**
-	 * 
-	 * The content of the subpage 
-	 * 
-	 * Use some default UI from WordPress guidelines echoed here (the sample above is with a template)
-	 * 
-	 * @see http://www.onextrapixel.com/2009/07/01/how-to-design-and-style-your-wordpress-plugin-admin-panel/
-	 *
-	 */
-	public function dx_plugin_subpage() {
-		echo '<div class="wrap">';
-		_e( "<h2>WC Plugin Subpage</h2> ", 'dxbase' );
-		_e( "I'm a subpage and I know it!", 'dxbase' );
-		echo '</div>';
-	}
+        }	
 	/**
 	 * Initialize the Settings class
 	 * 
@@ -115,8 +89,8 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * 
 	 */
 	public function dx_register_settings() {
-		require_once( WCP_PATH . '/wc-plugin-settings.class.php' );
-		new WC_Plugin_Settings();
+		require_once( WCP_PATH . '/dx-weather-forecast-settings.class.php' );
+		new DX_Weather_Forecast_Settings();
 	}
 	public function init_find_city() {
             $find_city = filter_input(INPUT_POST, 'find_city', FILTER_SANITIZE_SPECIAL_CHARS);
