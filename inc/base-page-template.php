@@ -7,11 +7,11 @@
         <input id="find-city" type="text" name="find_city" size="40" />
         <input type="submit" value="<?php  _e( "Find", 'DX-Weather-Forecast' ); ?>" />
     </form>
-    <?php if(isset($_POST['find_city'])):?>
+    <?php if( isset($_POST['find_city'] ) ):?>
         <div id="shortcode"></div>
         <div id="map"></div>
         <?php $api_key = get_option( 'wf_setting', '' );?>
-        <?php if(isset($api_key['wf_api_key'])):?>
+        <?php if( isset( $api_key['wf_api_key'] ) ):?>
         <script type="text/javascript">
             var map;
             function initMap() {
@@ -20,7 +20,7 @@
                   zoom: 1,
                   center: myLatLng
                 });
-                <?php foreach ($this->WF_Plugin->{results} as $key=>$item):?>
+                <?php foreach ( $this->WF_Plugin->{results} as $key=>$item ):?>
                     var marker<?php echo $key?> = new google.maps.Marker({
                         position: {
                             lat:<?php echo $item->{geometry}->{location}->{lat};?>,
