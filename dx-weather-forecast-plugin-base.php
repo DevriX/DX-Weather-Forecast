@@ -79,7 +79,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * The content of the base option page
 	 */
         public function wf_option_page() {
-            include_once( WFP_PATH_INCLUDES . '/base-page-template.php' );
+            include_once( WFP_PATH_INCLUDES . '/weather-admin-template.php' );
         }	
 	/**
 	 * Initialize the Settings class
@@ -187,7 +187,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Add textdomain for plugin
 	 */
 	public function wf_add_textdomain() {
-            $qwe = load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+            load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 	
 }
