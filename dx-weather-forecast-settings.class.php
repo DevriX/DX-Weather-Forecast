@@ -46,7 +46,7 @@ class DX_Weather_Forecast_Settings {
          *  Displayed text of section in options page        
          */
 	public function wf_settings_callback() {
-            echo __( "Enter API key", 'dxbase' );
+            echo __( "Enter API key", 'DX-Weather-Forecast' );
 	}
 	/*
          * Callback to display the input for google maps api  
