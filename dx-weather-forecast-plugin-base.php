@@ -40,7 +40,7 @@ class DX_Weather_Forecast_Plugin_Base {
             // register admin pages for the plugin
             add_action( 'admin_menu', array( $this, 'wf_admin_pages_callback' ) );
             // Register deactivation hook
-            register_deactivation_hook( __FILE__, 'dx_on_deactivate_callback' );
+            register_deactivation_hook( __FILE__, 'wf_on_deactivate_callback' );
             // Translation-ready
             add_action( 'plugins_loaded', array( $this, 'wf_add_textdomain' ) );
             // Add earlier execution as it needs to occur before admin page display
@@ -194,8 +194,9 @@ class DX_Weather_Forecast_Plugin_Base {
 /**
  * Register deactivation hook
  */
-function dx_on_deactivate_callback() {
-	// do something when deactivated
+function wf_on_deactivate_callback() {
+    delete_option('wf_all_cityes');
+    delete_option('wf_setting');
 }
 // Initialize everything
 $dx_weather_forecast_plugin_base = new DX_Weather_Forecast_Plugin_Base();
