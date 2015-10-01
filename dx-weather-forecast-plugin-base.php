@@ -43,7 +43,7 @@ class DX_Weather_Forecast_Plugin_Base {
             register_activation_hook( __FILE__, 'dx_on_activate_callback' );
             register_deactivation_hook( __FILE__, 'dx_on_deactivate_callback' );
             // Translation-ready
-            add_action( 'plugins_loaded', array( $this, 'dx_add_textdomain' ) );
+            add_action( 'plugins_loaded', array( $this, 'wf_add_textdomain' ) );
             // Add earlier execution as it needs to occur before admin page display
             add_action( 'admin_init', array( $this, 'wf_register_settings' ), 5 );
             // Add a sample shortcode
@@ -101,8 +101,7 @@ class DX_Weather_Forecast_Plugin_Base {
                 $find_city_nonce = filter_input(INPUT_POST, 'find_city_nonce', FILTER_SANITIZE_SPECIAL_CHARS);
                 if( wp_verify_nonce( $find_city_nonce, 'find_city' ) ){
                     $result = $this->get_coord($find_city);
-                    if(isset($result->results))
-                    {
+                    if(isset($result->results)) {
                         $this->WF_Plugin = $result;
                     }
                 }
@@ -186,52 +185,10 @@ class DX_Weather_Forecast_Plugin_Base {
             }
         }
 	/**
-	 * Hook for including a sample widget with options
-	 */
-	public function dx_sample_widget() {
-		include_once WCP_PATH_INCLUDES . '/dx-sample-widget.class.php';
-	}
-	
-	/**
 	 * Add textdomain for plugin
 	 */
-	public function dx_add_textdomain() {
+	public function wf_add_textdomain() {
             load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-	}
-	
-	/**
-	 * Callback for saving a simple AJAX option with no page reload
-	 */
-	public function store_ajax_value() {
-		if( isset( $_POST['data'] ) && isset( $_POST['data']['dx_option_from_ajax'] ) ) {
-			update_option( 'dx_option_from_ajax' , $_POST['data']['dx_option_from_ajax'] );
-		}	
-		die();
-	}
-	
-	/**
-	 * Callback for getting a URL and fetching it's content in the admin page
-	 */
-	public function fetch_ajax_url_http() {
-		if( isset( $_POST['data'] ) && isset( $_POST['data']['dx_url_for_ajax'] ) ) {
-			$ajax_url = $_POST['data']['dx_url_for_ajax'];
-			
-			$response = wp_remote_get( $ajax_url );
-			
-			if( is_wp_error( $response ) ) {
-				echo json_encode( __( 'Invalid HTTP resource', 'dxbase' ) );
-				die();
-			}
-			
-			if( isset( $response['body'] ) ) {
-				if( preg_match( '/<title>(.*)<\/title>/', $response['body'], $matches ) ) {
-					echo json_encode( $matches[1] );
-					die();
-				}
-			}
-		}
-		echo json_encode( __( 'No title found or site was not fetched properly', 'dxbase' ) );
-		die();
 	}
 	
 }
