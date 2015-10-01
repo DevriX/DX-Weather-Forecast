@@ -75,7 +75,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Callback for registering option page
 	 */
 	public function wf_admin_pages_callback() {
-            add_options_page(__( "Weather Forecast settings", 'DX-Weather-Forecast' ), __( "Weather city", 'weater-cityes-plugin' ), 'edit_themes', 'weater-cityes', array($this, 'wf_option_page'));
+            add_options_page(__( "Weather Forecast settings", 'DX-Weather-Forecast' ), __( "Weather forecast", 'DX-Weather-Forecast' ), 'edit_themes', 'weater-forecast', array($this, 'wf_option_page'));
 	}	
 	/**
 	 * 
@@ -137,7 +137,7 @@ class DX_Weather_Forecast_Plugin_Base {
                 $body = json_decode($responce['body']);
                 return $body;
             } else {
-                return __( 'Error ocured!', 'weater-cityes-plugin');
+                return __( 'Error ocured!', 'DX-Weather-Forecast');
             }
         }
 	/**
@@ -157,7 +157,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 */
 	public function wc_shortcode_body( $attr, $content = null ) {
             $display_kelvins = get_option('wc_setting');
-            switch (true){
+            switch(true) {
                 case (isset($attr['city'])):
                     $weather = $this->get_city('q='.$attr['city']);
                     if(isset($weather->name)) {
@@ -200,7 +200,7 @@ class DX_Weather_Forecast_Plugin_Base {
                     update_option('wc_all_cityes', $wc_all_cityes);
                     return $body;
                 } else {
-                    return __( 'Error ocured!', 'weater-cityes-plugin');
+                    return __( 'Error ocured!', 'DX-Weather-Forecast');
                 }
             } else {
                 return $wc_all_cityes[$param]['body'];
@@ -275,4 +275,4 @@ function dx_on_deactivate_callback() {
 }
 
 // Initialize everything
-$dx_plugin_base = new WC_Plugin_Base();
+$dx_weather_forecast_plugin_base = new DX_Weather_Forecast_Plugin_Base();
