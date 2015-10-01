@@ -25,8 +25,8 @@ define( 'WCP_URL_INCLUDES', WCP_URL . '/inc' );
  * @author nofearinc
  *
  */
-class WC_Plugin_Base {
-        public $WC_Plugin;
+class DX_Weather_Forecast_Plugin_Base {
+        public $WF_Plugin;
     /**
 	 * 
 	 * Assign everything as a call from within the constructor
