@@ -131,7 +131,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * @param array $attr arguments passed to array, like [wf_shortcode city="London" coord="0,0"]
 	 */
 	public function wf_shortcode_body( $attr, $content = null ) {
-            $display_kelvins = get_option('wc_setting');
+            $display_kelvins = get_option('wf_setting');
             switch(true) {
                 case (isset($attr['city'])):
                     $weather = $this->get_city('q='.$attr['city']);
@@ -154,16 +154,20 @@ class DX_Weather_Forecast_Plugin_Base {
                     break;
             }
 	}
+        /*
+         * Get weater using  openweathermap.org api
+         * Weater result are cashed with 30m intervar (weather doesn't change in it interval so mutch)
+         */
 	public function get_city($param) {
             $wc_all_cityes = get_option('wc_all_cityes');            
             if(
-                    !isset($wc_all_cityes[$param]) ||  
-                    (
-                        isset($wc_all_cityes[$param]) &&
-                        (   
-                            time() >= $wc_all_cityes[$param]['time']
-                        )
+                !isset($wc_all_cityes[$param]) ||  
+                (
+                    isset($wc_all_cityes[$param]) &&
+                    (   
+                        time() >= $wc_all_cityes[$param]['time']
                     )
+                )
             ){
                 $responce = wp_remote_get('http://api.openweathermap.org/data/2.5/weather?'.$param);
                 if (!is_wp_error($responce)){                
