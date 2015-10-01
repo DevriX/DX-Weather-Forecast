@@ -39,8 +39,7 @@ class DX_Weather_Forecast_Plugin_Base {
             add_action( 'admin_enqueue_scripts', array( $this, 'wf_add_admin_CSS' ) );
             // register admin pages for the plugin
             add_action( 'admin_menu', array( $this, 'wf_admin_pages_callback' ) );
-            // Register activation and deactivation hooks
-            register_activation_hook( __FILE__, 'dx_on_activate_callback' );
+            // Register deactivation hook
             register_deactivation_hook( __FILE__, 'dx_on_deactivate_callback' );
             // Translation-ready
             add_action( 'plugins_loaded', array( $this, 'wf_add_textdomain' ) );
@@ -191,13 +190,6 @@ class DX_Weather_Forecast_Plugin_Base {
             load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 	
-}
-
-/**
- * Register activation hook
- */
-function dx_on_activate_callback() {
-	// do something on activation
 }
 /**
  * Register deactivation hook
