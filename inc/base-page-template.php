@@ -1,11 +1,11 @@
 <div class="wrap">
     <div id="icon-edit" class="icon32 icon32-base-template"><br></div>
-    <h2><?php  _e( "Weather cityes plugin page", 'weater-cityes-plugin' ); ?></h2>
+    <h2><?php  _e( "Weather cityes plugin page", 'DX-Weather-Forecast' ); ?></h2>
     <form id="wf-plugin-find-city-form" action="<?php echo $_SERVER['PHP_SELF']?>?page=weater-forecast" method="POST">
         <?php $find_city = wp_create_nonce( 'find_city' );?>
         <input type="hidden" name="find_city_nonce" value="<?php echo $find_city ?>" />
         <input id="find-city" type="text" name="find_city" size="40" />
-        <input type="submit" value="Find" />
+        <input type="submit" value="<?php  _e( "Find", 'DX-Weather-Forecast' ); ?>" />
     </form>
     <?php if(isset($_POST['find_city'])):?>
         <div id="shortcode"></div>
@@ -28,7 +28,7 @@
                         },
                         map: map,
                         animation: google.maps.Animation.DROP,
-                        title: '<?php  _e( "Shortcode:", 'weater-cityes-plugin' ); ?> [wf_shortcode coord="<?php echo $item->{geometry}->{location}->{lat};?>,<?php echo $item->{geometry}->{location}->{lng};?>"]'
+                        title: '<?php  _e( "Shortcode:", 'DX-Weather-Forecast' ); ?> [wf_shortcode coord="<?php echo $item->{geometry}->{location}->{lat};?>,<?php echo $item->{geometry}->{location}->{lng};?>"]'
                     }); 
                 google.maps.event.addListener(marker<?php echo $key?>, 'click', function(event) {   
                     document.getElementById('shortcode').innerHTML = '[wf_shortcode coord="'+event.latLng.H+','+event.latLng.L+'"]';
@@ -41,12 +41,12 @@
           src="https://maps.googleapis.com/maps/api/js?key=<?php echo $api_key['wf_api_key']; ?>&callback=initMap">
         </script>
         <?php endif;?>
-        <h3><?php  _e( "Results:", 'weater-cityes-plugin' ); ?></h3>
+        <h3><?php  _e( "Results:", 'DX-Weather-Forecast' ); ?></h3>
         <div class="find-city-results">
             <?php foreach ($this->WF_Plugin->{results} as $item):?>
                 <p>
                     <?php echo $item->formatted_address?><br />
-                    <?php  _e( "Shortcode:", 'weater-cityes-plugin' ); ?> [wf_shortcode coord="<?php echo $item->{geometry}->{location}->{lat};?>,<?php echo $item->{geometry}->{location}->{lng};?>"]
+                    <?php  _e( "Shortcode:", 'DX-Weather-Forecast' ); ?> [wf_shortcode coord="<?php echo $item->{geometry}->{location}->{lat};?>,<?php echo $item->{geometry}->{location}->{lng};?>"]
                 </p>
             <?php endforeach;?>
         </div>
