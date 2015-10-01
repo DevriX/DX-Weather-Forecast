@@ -187,7 +187,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * Add textdomain for plugin
 	 */
 	public function wf_add_textdomain() {
-            load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+            $qwe = load_plugin_textdomain( 'DX-Weather-Forecast', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 	
 }
