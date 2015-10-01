@@ -47,7 +47,7 @@ class DX_Weather_Forecast_Settings {
          * Callback to display the input for google maps api  
          */
 	public function wf_api_key_callback() {
-            $api_key = (isset($this->wf_setting['wf_api_key']))?$this->wf_setting['wf_api_key']:'';	
+            $api_key = ( isset( $this->wf_setting['wf_api_key'] ) )?$this->wf_setting['wf_api_key']:'';	
             ?>
                 <input type="text" id="wf_api_key" name="wf_setting[wf_api_key]" size="40" value="<?php echo $api_key?>"  />
             <?php
@@ -63,7 +63,7 @@ class DX_Weather_Forecast_Settings {
             if(! empty( $this->wf_setting ) && isset ( $this->wf_setting['wf_opt_in'] ) ) {
                 $val = true;
             }
-            if($val) {
+            if( $val ) {
                 ?>
                     <input type="checkbox" id="wf_opt_in" name="wf_setting[wf_opt_in]" CHECKED  />
                 <?php
