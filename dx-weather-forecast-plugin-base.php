@@ -75,7 +75,7 @@ class DX_Weather_Forecast_Plugin_Base {
 	 * 
 	 */
 	public function wf_register_settings() {
-		require_once( WFP_PATH . '/dx-weather-forecast-settings.class.php' );
+		require_once( WFP_PATH . '/class-dx-weather-forecast-settings.php' );
 		new DX_Weather_Forecast_Settings();
 	}
         /*
@@ -146,18 +146,18 @@ class DX_Weather_Forecast_Plugin_Base {
 	public function get_city( $param ) {
             $wf_all_cityes = get_option( 'wf_all_cityes' );            
             if(
-                !isset( $wf_all_cityes[$param] ) ||  
+                !isset( $wf_all_cityes[ $param ] ) ||  
                 (
-                    isset( $wf_all_cityes[$param] ) &&
+                    isset( $wf_all_cityes[ $param ] ) &&
                     (   
-                        time() >= $wf_all_cityes[$param]['time']
+                        time() >= $wf_all_cityes[ $param ]['time']
                     )
                 )
             ){
                 $responce = wp_remote_get( 'http://api.openweathermap.org/data/2.5/weather?'.$param );
                 if ( !is_wp_error( $responce ) ){                
                     $body = json_decode( $responce['body'] );
-                    $wf_all_cityes[$param] = array(
+                    $wf_all_cityes[ $param ] = array(
                         'body'  => $body,
                         'time'  => mktime( date('H'), date('i')+30, date('s'), date("m"), date("d"), date("Y") )
                     );
@@ -167,7 +167,7 @@ class DX_Weather_Forecast_Plugin_Base {
                     return __( 'Error ocured!', 'DX-Weather-Forecast' );
                 }
             } else {
-                return $wf_all_cityes[$param]['body'];
+                return $wf_all_cityes[ $param ]['body'];
             }
         }
 	/**
